@@ -1,41 +1,36 @@
-class ListBinding{
-  constructor(element){
-    this.element = element; // an odered or under list
+class ListBinding {
+  constructor(element) {
+    this.element = element; // an ordered or under list
     this.textList = [];
-    
   }
   /* delete all element from list*/
-  deleteAll(){
-    while(this.element.firstChild)
+  deleteAll() {
+    while (this.element.firstChild)
       this.element.removeChild(this.element.firstChild);
-       
   }
-  
+
   /*  update the GUI*/
-  update(){
+  update() {
     this.deleteAll();
-    for(let text of this.textList){
-      let item = document.createElement('li');
+    for (let text of this.textList) {
+      let item = document.createElement("li");
       item.textContent = text;
       this.element.appendChild(item);
     }
   }
-  
- /*add elemte into list */ 
-  add(item){
+
+  /*add element into list */
+
+  add(item) {
     this.textList.push(item);
     this.update();
-    
-  };
-  /* delete first elemte of the list  */
-  deleteFirst(){
+  }
+  /* delete first element of the list  */
+  deleteFirst() {
     this.textList.shift();
     this.update();
-
   }
-  
-  
 }
-const myList = document.getElementById('myList');
-let listBinding  = new ListBinding(myList);
+const myList = document.getElementById("myList");
+let listBinding = new ListBinding(myList);
 listBinding.update();

@@ -2,63 +2,51 @@ class List {
   constructor(name) {
     this.name = name;
     this.list = [];
-    this.targetList = document.getElementById("toDoList");
-    this.userInput = document.getElementById("new-task");
-    this.toDoForm = document.getElementById("toDoForm");
-    console.log(this);
-    this.toDoForm.addEventListener("submit", e => {
-      e.preventDefault();
-      this.add(this.userInput.value);
-      console.log(this);
-    });
   }
 
   add(item) {
-    let newListItem = document.createElement("li");
-    newListItem.innerHTML +=
-      '<input type="checkbox" onclick="sel()" value="Select" />  ' + item;
-    if (this.targetList.childElementCount == 0) {
-      this.targetList.appendChild(newListItem);
-      this.userInput.value = "";
+    if (this.list.length == 0) {
+      this.list.push(item);
     } else {
-      this.targetList.insertBefore(newListItem, this.targetList.firstChild);
-      this.userInput.value = "";
+      this.list.unshift(item);
     }
-    console.log(newListItem);
+    //this.list.push(item);
+    this.render();
+  }
+  cleanList() {
+    while (this.name.firstChild) {
+      this.name.removeChild(this.name.firstChild);
+    }
+  }
+  render() {
+    this.cleanList();
+    for (let member of this.list) {
+      let newItem = document.createElement("li");
+      newItem.innerHTML +=
+        '<input type="checkbox" onclick="List.prototype.check();" value="Select" />  ' +
+        member +
+        " " +
+        '<a class="deleteButton" onclick="List.prototype.link();">Delete</a>';
+      this.name.appendChild(newItem);
+    }
   }
 
   delete(item) {}
 
-  check(item) {}
+  check() {
+    console.log("checkbox clicked!");
+  }
 
-  unCheck(item) {}
-}
-
-let testList = new List("hi");
-
-// const htmlList = document.getElementById("toDoList");
-// let javascriptList = new List(htmlList);
-
-/*
-function addItem() {
-  newListItem.innerHTML +=
-    '<input type="checkbox" onclick="sel()" value="Select" />  ' +
-    userInput.value;
-  newListItem.onclick = function() {
-    this.parentNode.removeChild(this);
-  };
-  if (list.childElementCount == 0) {
-    list.appendChild(newListItem);
-    userInput.value = "";
-  } else {
-    list.insertBefore(newListItem, list.firstChild);
-    userInput.value = "";
+  link() {
+    console.log("link clicked!");
   }
 }
+const theForm = document.getElementById("toDoForm");
+const htmlList = document.getElementById("toDoList");
+let javascriptList = new List(htmlList);
 
-function test() {
-  console.log("Item Clicked!");
-}
-
-list.addEventListener("click", test);
-*/
+theForm.addEventListener("submit", e => {
+  let userInput = document.getElementById("new-task");
+  e.preventDefault();
+  javascriptList.add(userInput.value);
+});
