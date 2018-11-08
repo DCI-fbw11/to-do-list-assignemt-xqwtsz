@@ -12,9 +12,11 @@
 <body>
     <div class="container">
         <p>
-            <label for="new-task">Add Item</label>
-            <input id="new-task" onfocus="this.value=''" type="text">
-            <button id="addButton" onclick="addItem()">Add</button>
+            <form id="toDoForm" action="">
+                <label for="new-task">Add Item</label>
+                <input id="new-task" onfocus="this.value=''" type="text">
+                <button id="addButton">Add</button>
+            </form>
         </p>
 
         <h3 id="test">Do These</h3>
