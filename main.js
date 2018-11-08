@@ -20,13 +20,14 @@ class List {
   }
   render() {
     this.cleanList();
-    for (let member of this.list) {
+    for (let member = 0; member < this.list.length; member++) {
       let newItem = document.createElement("li");
       newItem.innerHTML +=
-        '<input type="checkbox" onclick="List.prototype.check();" value="Select" />  ' +
-        member +
+        `<input type="checkbox" onclick="List.prototype.check();" tag="${member}" value="Select" />` +
         " " +
-        '<a class="deleteButton" onclick="List.prototype.link();">Delete</a>';
+        this.list[member] +
+        " " +
+        `<a class="deleteButton" onclick="List.prototype.link();" tag="${member}">Delete</a>`;
       this.name.appendChild(newItem);
     }
   }
@@ -35,12 +36,24 @@ class List {
 
   check() {
     console.log("checkbox clicked!");
+    var current = this;
+    for (var i = 0; i < elem.length; i++) {
+      if (current != elem[i]) {
+        elem[i].classList.remove("active");
+      } else if (current.classList.contains("active") === true) {
+        current.classList.remove("active");
+      } else {
+        current.classList.add("active");
+      }
+    }
   }
 
   link() {
     console.log("link clicked!");
+    console.log(this);
   }
 }
+
 const theForm = document.getElementById("toDoForm");
 const htmlList = document.getElementById("toDoList");
 let javascriptList = new List(htmlList);
@@ -49,4 +62,7 @@ theForm.addEventListener("submit", e => {
   let userInput = document.getElementById("new-task");
   e.preventDefault();
   javascriptList.add(userInput.value);
+  console.log(javascriptList.list);
 });
+
+console.log(javascriptList.list);

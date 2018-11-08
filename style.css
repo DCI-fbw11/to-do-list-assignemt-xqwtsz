@@ -17,10 +17,15 @@ body {
 
 #toDoList li {
   padding: 0.3em;
+  border: 1px solid pink;
 }
 .checked {
   color: green;
 }
 .unChecked {
   color: red;
+}
+.deleteButton {
+  color: red;
+  font-size: 0.7em;
 }
