@@ -1,0 +1,17 @@
+body {
+  background: #000;
+  color: #fff;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+.container {
+  display: block;
+  width: 400px;
+  margin: 100px auto 0;
+}
+#toDoList {
+  list-style-type: none;
+}
+
+#toDoList li {
+  padding: 0.3em;
+}
