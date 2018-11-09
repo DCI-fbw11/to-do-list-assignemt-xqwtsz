@@ -6,12 +6,8 @@ class List {
 
   add(item) {
     let newItem = document.createElement("li");
-    newItem.innerHTML +=
-      `<input type="checkbox" onclick="check();" value="Select" />` +
-      " " +
-      item +
-      " " +
-      `<a class="deleteButton" onclick="deleteItem();"tag="pepperoni" >Delete</a>`;
+    newItem.onclick = deleteItem;
+    newItem.innerHTML += item;
     if (this.list.length == 0) {
       this.list.push(newItem);
     } else {
@@ -28,9 +24,15 @@ class List {
   }
   render() {
     this.cleanList();
+    for (let item = 0; item < this.list.length; item++) {
+      if (this.list[item].class === "click") {
+        this.list.splice(item, 1);
+      }
+    }
     for (let member = 0; member < this.list.length; member++) {
       this.list[member].tag = member;
       this.name.appendChild(this.list[member]);
+      // console.log(this.list[member].tag);
     }
   }
 
@@ -38,16 +40,11 @@ class List {
     console.log("link clicked!");
     for (var i = 0; i < this.list.length; i++) {
       this.list[i].addEventListener("click", function() {
-        this.parentNode.removeChild(this);
+        this.class = "click";
       });
     }
+    this.render();
   }
-  check() {
-    console.log("checkbox clicked!");
-    console.log(this);
-  }
-
-  link() {}
 }
 
 const theForm = document.getElementById("toDoForm");
@@ -58,10 +55,10 @@ theForm.addEventListener("submit", e => {
   let userInput = document.getElementById("new-task");
   e.preventDefault();
   javascriptList.add(userInput.value);
-  console.log(javascriptList.list);
+  // console.log(javascriptList.list);
 });
 
-console.log(javascriptList.list);
+// console.log(javascriptList.list);
 
 function check() {
   javascriptList.check();
