@@ -2,33 +2,59 @@ body {
   background: #000;
   color: #fff;
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  text-align: center;
 }
+
 .container {
   display: block;
   width: 400px;
   margin: 100px auto 0;
 }
+
 #toDoForm {
   /* border: 1px solid pink; */
 }
+
 #toDoList {
   list-style-type: none;
 }
 
 #toDoList li {
   padding: 0.3em;
-  border: 1px solid pink;
+  width: 300px;
+  /* border: 1px solid pink; */
+  font-size: 1.5em;
 }
+
+#new-task,
+#new-task:focus {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid greenyellow;
+  width: 100%;
+  height: 10%;
+  color: white;
+  font-size: 2em;
+  outline: none;
+  text-align: center
+}
+
 .checked {
-  color: green;
+  color: grey;
+  text-decoration: line-through;
 }
+
 .unChecked {
   color: red;
 }
-.deleteButton {
+
+.remove {
   color: red;
   font-size: 0.7em;
+  border: none;
+  background: none;
 }
+
 .click {
   background: pink;
 }

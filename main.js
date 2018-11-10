@@ -4,46 +4,64 @@ class List {
     this.list = [];
   }
 
-  add(item) {
-    let newItem = document.createElement("li");
-    newItem.onclick = deleteItem;
-    newItem.innerHTML += item;
-    if (this.list.length == 0) {
-      this.list.push(newItem);
-    } else {
-      this.list.unshift(newItem);
+  updateList() {
+    this.deleteAll();
+    let list_check = localStorage.getItem('todo');
+    if (list_check !== null) {
+      this.list = JSON.parse(list_check);
     }
-    //this.list.push(item);
+    return this.list;
+  }
+
+  add(item) {
+    this.list = this.updateList();
+
+    if (this.list.length == 0) {
+      this.list.push(item);
+    } else {
+      this.list.unshift(item);
+    }
+
+    localStorage.setItem('todo', JSON.stringify(this.list));
+
     this.render();
   }
 
-  cleanList() {
+  deleteAll() {
     while (this.name.firstChild) {
       this.name.removeChild(this.name.firstChild);
     }
   }
-  render() {
-    this.cleanList();
-    for (let item = 0; item < this.list.length; item++) {
-      if (this.list[item].class === "click") {
-        this.list.splice(item, 1);
-      }
-    }
-    for (let member = 0; member < this.list.length; member++) {
-      this.list[member].tag = member;
-      this.name.appendChild(this.list[member]);
-      // console.log(this.list[member].tag);
-    }
+
+  deleteItem(id) {
+    this.list = this.updateList();
+    this.list.splice(id, 1)
+
+    localStorage.setItem('todo', JSON.stringify(this.list))
+    this.deleteAll();
+    this.render();
   }
 
-  deleteItem() {
-    console.log("link clicked!");
-    for (var i = 0; i < this.list.length; i++) {
-      this.list[i].addEventListener("click", function() {
-        this.class = "click";
-      });
+  /* toggle(item) {
+    if (item.classList.contains('checked')) {
+      item.classList.remove('checked');
+    } else {
+      item.classList.add('checked');
     }
-    this.render();
+  } */
+
+  render() {
+
+    this.list = this.updateList();
+
+
+    for (let t = 0; t < this.list.length; t++) {
+      let newItem = document.createElement("li");
+      newItem.innerHTML += "&#9830;  " + this.list[t] + '<button class="remove" onclick="remove();">delete</button>';
+      newItem.id = t;
+      /* newItem.onclick = toggle; */
+      this.name.appendChild(newItem);
+    }
   }
 }
 
@@ -54,22 +72,25 @@ let javascriptList = new List(htmlList);
 theForm.addEventListener("submit", e => {
   let userInput = document.getElementById("new-task");
   e.preventDefault();
-  javascriptList.add(userInput.value);
-  // console.log(javascriptList.list);
+  javascriptList.add(userInput.value)
+  userInput.value = "";
+
 });
 
-// console.log(javascriptList.list);
-
-function check() {
-  javascriptList.check();
+function remove() {
+  let id = this.id;
+  javascriptList.deleteItem(id);
 }
 
-function deleteItem() {
-  javascriptList.deleteItem();
-  // var listItems = document.getElementsByTagName("li"); // or document.querySelectorAll("li");
-  // for (var i = 0; i < listItems.length; i++) {
-  //   listItems[i].addEventListener("click", function() {
-  //     this.parentNode.removeChild(this);
-  //   });
-  // }
-}
+/* function toggle() {
+  javascriptList.toggle(this);
+  //console.log(this + "is clicked");
+  /*
+    if (this.classList.contains('checked')) {
+      this.classList.remove('checked');
+    } else {
+      this.classList.add('checked');
+    }
+}*/
+
+javascriptList.render();
