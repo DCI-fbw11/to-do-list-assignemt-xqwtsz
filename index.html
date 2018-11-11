@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="style.css">
     <title>To Do List</title>
 </head>
@@ -12,17 +13,16 @@
 <body>
     <div class="container">
         <div>
-            <h1>First type, then do it.</h1>
+            <h1>FIRST TYPE, THEN DO IT.</h1>
             <p>
                 <form id="toDoForm" action="">
                     <label for="new-task"></label>
-                    <input id="new-task" onfocus="this.value=''" type="text" placeholder="enter a task here" required>
-                    <!-- <button id="addButton">Add</button> -->
+                    <input id="new-task" type="text" placeholder="enter a task here" maxlength="30" required>
                 </form>
             </p>
 
-            <h3 id="test">
-            </h3>
+            <h4 id="test">
+            </h4>
             <ul id="toDoList">
 
 
