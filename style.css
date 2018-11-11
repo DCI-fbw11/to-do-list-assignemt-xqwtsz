@@ -56,6 +56,10 @@ body {
   text-align: center
 }
 
+input:required {
+  box-shadow: none;
+}
+
 .checked {
   color: #8b998d;
   text-decoration: line-through;
