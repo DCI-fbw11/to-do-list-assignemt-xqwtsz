@@ -67,7 +67,7 @@ class List {
       let checked =
         '<input type="checkbox" onclick="toggle(this);" checked> ' +
         this.list[t].item +
-        ' <button class="remove" onclick="remove(this);">remove</button>';
+        '<button class="remove" onclick="remove(this);">remove</button>';
       let unchecked =
         '<input type="checkbox" onclick="toggle(this);"> ' + this.list[t].item;
       let toggle;
